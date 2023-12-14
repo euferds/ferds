@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FERDS</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="Imagens/CD GIF.gif">
+  <style>
+    /* Estilos de exemplo para o rodapé */
+    body, html {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh; /* Ajusta a altura da página inteira */
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #191919;
+      position: relative;
+    }
+
+    .footer {
+      margin-top: auto; /* Empurra o rodapé para a parte inferior da página */
+      width: 100%;
+      text-align: center;
+      padding: 30px;
+      background-color: #191919;
+      color: #ffffff;
+      font-size: 80%;
+    }
+
+    .password-section {
+      display: none;
+    }
+
+    .password-box {
+      text-align: center;
+      position: absolute;
+      top: 50%; /* Centraliza na metade vertical da página */
+      left: 50%; /* Centraliza na metade horizontal da página */
+      transform: translate(-50%, -50%); /* Centraliza completamente */
+    }
+
+    .password-box input[type="password"] {
+      padding: 10px;
+      margin-bottom: 10px;
+      border: none;
+      border-bottom: 2px solid #ccc; /* Linha inferior simulando a entrada */
+      outline: none; /* Remove a borda ao focar */
+      background: transparent; /* Campo de senha transparente */
+      width: 200px; /* Largura do campo de senha */
+      color: #555; /* Cor do texto */
+      font-size: 16px; /* Tamanho da fonte */
+    }
+
+    .ass {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      top: 60px; /* Posiciona no topo da página */
+      left: 50%; /* Centraliza na metade horizontal da página */
+      transform: translateX(-50%); /* Centraliza horizontalmente */
+      cursor: pointer;
+    }
+
+    .cdgirando {
+      width: 80px;
+      height: 80px;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+
+<body>
+  <img src="Imagens/assinatura.png" alt="assinatura" class="ass" onclick="togglePasswordSection()">
+
+  <main class="main-content">
+    <section class="password-section">
+      <div class="password-box">
+        <input type="password" id="password" placeholder="Digite a senha">
+        <br>
+        <br>
+        <img src="Imagens/CD GIF.gif" alt="cd girando" onclick="checkPassword()" class="cdgirando">      
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p> 
+        ALL RIGHTS RESERVED &copy; <b>2023 FERDS</b>
+    </p>
+  </footer>
+
+  <script>
+    function checkPassword() {
+      var password = document.getElementById("password").value;
+      if (password === "soporhobbymrm") {
+        //alert("Senha correta! Redirecionando...");
+        window.location.href = "epsphm.html"; // Redireciona para o untitled
+      } else {
+        alert("Senha incorreta. Tente novamente.");
+      }
+    }
+
+    function togglePasswordSection() {
+      var passwordSection = document.querySelector('.password-section');
+      if (passwordSection.style.display === 'none' || passwordSection.style.display === '') {
+        passwordSection.style.display = 'flex';
+      } else {
+        passwordSection.style.display = 'none';
+      }
+    }
+  </script>
+  
+</body>
+</html>
