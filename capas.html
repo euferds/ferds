@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FERDS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DearlylovedSlabOne&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="Imagens/ferds.png">
+    <style>
+        @font-face {
+            font-family: 'DearlylovedSlabOne';
+            src: url('fontes/WireTypeMono/WireTypeMono-Bold.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body, html {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            font-family: 'DearlylovedSlabOne', sans-serif;
+            background-color: #fffffd;
+            position: relative;
+        }
+
+        .footer {
+            top: 90.5vh; /* ou o valor necessário */
+            width: 100%;
+            text-align: center;
+            background-color: transparent;
+            color: #000000;
+            font-size: 120%;
+            position: fixed;
+        }
+        .ferdslogo {
+            position: fixed;
+            width: 90px;
+            height: 90px;
+            top: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            transition: opacity ease-in-out;
+        }
+
+        .ferdslogo:hover {
+            opacity: 0.5;
+        }
+
+        /* Estilo para remover a borda preta do input */
+        input[type="email"] {
+            border: none;
+            outline: none; /* Remove a borda ao focar */
+            left: 70%;
+            width: 600px; /* Aumenta a largura do input */
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 1rem; /* Mantém o tamanho da fonte */
+            background-color: transparent;
+            color: #000000;
+            font-family: 'DearlylovedSlabOne, sans-serif';
+            border-radius: 5px;
+            cursor: text;
+        }
+
+        .arrow-icon {
+            display: none;
+            cursor: pointer;
+        }
+
+        .arrow-icon:hover {
+            opacity: 0.5;
+        }
+
+        .capademo {
+            position:relative;
+            top: 25%;
+            width: 40vh;
+            left: -70%;
+            height: auto;
+        }
+
+        .capavf {
+            position:relative;
+            top: -15%;
+            width: 40vh;
+            left: 70%;
+            height: auto;
+        }
+        
+        .versao-text {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* Estilos para o posicionamento dos textos */
+        #versaodemo {
+            position: absolute;
+            top: 67%;
+            left: -20%;
+            transform: translate(-50%, -50%);
+        }
+
+        #versaofinal {
+            position: absolute;
+            width: 150%;
+            top: 67%;
+            left: 122%;
+            transform: translate(-50%, -50%);
+        }
+
+    </style>
+</head>
+<body>
+
+    <img src="Imagens/ferds.png" alt="logo" class="ferdslogo" id="logo">
+
+    <img src="Imagens/capa.jpg" class="capademo">
+    <div class="versao-text" id="versaodemo">CAPA DA VERSÃO DEMO</div>
+
+    <img src="Imagens/capaabbeyroad.jpg" class="capavf">
+    <div class="versao-text" id="versaofinal">REF DA CAPA DA VERSÃO FINAL</div>
+
+    <footer class="footer">
+        <p> 
+            ALL RIGHTS RESERVED &copy; <b>2023 FERDS</b>
+        </p>
+    </footer>
+
+    <script src= "https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>  
+
+        const logo = document.getElementById('logo');
+        const container = document.createElement('div');
+        container.style.display = 'flex';
+        container.style.alignItems = 'center';
+        container.style.justifyContent = 'center';
+        container.style.height = '100%';
+        container.style.position = 'fixed';
+        container.style.top = '0';
+        container.style.left = '0';
+        container.style.right = '0';
+        container.style.bottom = '0';
+        container.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+        container.style.zIndex = '1000';
+        container.style.display = 'none';
+        document.body.appendChild(container);
+
+        const input = document.createElement('input');
+        input.type = 'email';
+        input.placeholder = 'DEIXE O SEU EMAIL AQUI OU DIGITE "@inicio" PARA VOLTAR À PÁGINA INICIAL';
+        input.style.border = 'none';
+        input.style.backgroundColor = 'transparent';
+        input.style.color = '#000000';
+        input.style.fontFamily = 'DearlylovedSlabOne, sans-serif';
+        input.style.fontSize = '1rem';
+        input.style.padding = '10px';
+        input.style.borderRadius = '5px';
+        input.style.cursor = 'text';
+        container.appendChild(input);
+
+        const arrowIcon = document.createElement('span');
+        arrowIcon.innerHTML = '&#8594;'; // HTML Entity para a seta
+        arrowIcon.classList.add('arrow-icon');
+        container.appendChild(arrowIcon);
+
+        input.addEventListener('input', () => {
+            const email = input.value.trim();
+            arrowIcon.style.display = email.includes('@') && email.indexOf('@') === email.lastIndexOf('@') ? 'inline-block' : 'none';
+        });
+
+        let isLight = true;
+
+        logo.addEventListener('click', () => {
+            if (isLight && container.style.display === 'none') {
+                document.body.style.backgroundColor = 'rgb(255, 255, 253)';
+                isLight = false;
+                container.style.display = 'flex';
+            } else {
+                container.style.display = 'none';
+                if (!isLight) {
+                    document.body.style.backgroundColor = '#fffffd';
+                    isLight = true;
+                }
+            }
+        });
+
+        logo.addEventListener('click', (event) => {
+            if (!isLight) {
+                event.stopPropagation();
+            }
+        });
+
+        arrowIcon.addEventListener('click', () => {
+        const email = input.value.trim();
+    
+        if (email === '@inicio') {
+                window.location.href = 'index.html';
+
+            } else if (email === '@help') {
+    // Exibir um alerta com uma lista de comandos
+    const commandsList = `
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li>@inicio: Voltar para a página inicial.</li>
+            <li>@voltar: Voltar para a mesma página.</li>
+            <li>@projetos: Acesso aos projetos.</li>
+            <li>@help: Exibir esta lista de comandos.</li>
+        </ul>
+    `;
+    Swal.fire({
+        title: 'Lista de comandos',
+        icon: 'info',
+        html: commandsList,
+        iconColor: 'black', // Altere para a cor desejada
+        confirmButtonColor: 'black',
+        fontfamily: 'DearlylovedSlabOne, sans-serif',
+    });
+            
+            } else if (email === '@capas') {
+                alert('Você já está nessa página.');
+            } else if (email === '@voltar') {
+                window.location.reload();
+            } else if (email === '@projetos') {
+                input.style.display = 'none';
+                
+                const existingPasswordInput = container.querySelector('input[type="password"]');
+                if (existingPasswordInput) {
+                    existingPasswordInput.remove();
+                    arrowIcon.style.display = 'none';
+                }
+
+                const passwordInput = document.createElement('input');
+                passwordInput.type = 'password';
+                passwordInput.placeholder = 'SENHA';
+                passwordInput.style.outline = 'none';
+                passwordInput.style.border = 'none';
+                passwordInput.style.backgroundColor = 'transparent';
+                passwordInput.style.color = '#000000';
+                passwordInput.style.fontFamily = 'DearlylovedSlabOne, sans-serif';
+                passwordInput.style.fontSize = '1rem';
+                passwordInput.style.padding = '10px';
+                passwordInput.style.borderRadius = '5px';
+                passwordInput.style.cursor = 'text';
+                passwordInput.style.width = '520px';
+                passwordInput.style.marginTop = '10px';
+                container.appendChild(passwordInput);
+                arrowIcon.style.display = 'inline-block';
+                passwordInput.style.width = '520px'; // Ajusta a largura do campo de senha
+                passwordInput.style.marginRight = '10px'; // Espaçamento para a seta
+
+        // Adiciona a seta ao lado do campo de entrada de senha
+        arrowIcon.style.display = 'inline-block';
+        container.appendChild(arrowIcon);
+
+        // Adicionando a lógica de verificação da senha
+        arrowIcon.addEventListener('click', () => {
+                    const password = passwordInput.value.trim();
+                    if (password === 'soporhobbymrm') {
+                        window.location.href = 'sphm.html';
+                    } else {
+                        alert('Senha incorreta. Por favor, tente novamente.');
+                    }
+                });
+            } else {
+                const existingPasswordInput = container.querySelector('input[type="password"]');
+                if (existingPasswordInput) {
+                    existingPasswordInput.remove();
+                    arrowIcon.style.display = 'none';
+                    
+             } else {
+                // Simulação de armazenamento no banco de dados (não é real, apenas para exemplo)
+                // Substitua este bloco com a lógica real para enviar dados para o banco de dados
+                // Remove o campo de entrada após o envio bem-sucedido
+                // Redirecionamentos
+
+                // Verifica se o email não é @inicio ou @capas para exibir a mensagem de sucesso
+                if (email !== '@capas' && email !== '@projetos' && email !== '@inicio' && email !== '@voltar' && email !== '@help') {
+                    input.style.display = 'none';
+                    
+                    const successMessage = document.createElement('p');
+                    successMessage.textContent = 'EMAIL RECEBIDO'; // \n para pular linha
+                    successMessage.style.marginTop = '10px';
+                    successMessage.style.textAlign = 'center';
+                    successMessage.style.top = '50%';
+                    successMessage.style.fontSize = '1.2rem';
+                    successMessage.style.fontWeight = 'bold';
+                    container.appendChild(successMessage);
+                    successMessage.style.color = '#000000';
+                    successMessage.style.top = '55%';
+            
+                    arrowIcon.style.display = 'none';
+
+                    let count = 10;
+                    const countdown = setInterval(() => {
+                        successMessage.textContent = `EMAIL RECEBIDO. Recarregando em ${count} segundos...`;
+                            
+                        if (count <= 0) {
+                            clearInterval(countdown);
+                            window.location.reload(); // Recarrega a página
+                        }
+                        count--;
+                    }, 1000); // Contagem a cada segundo (1000 milissegundos)
+                }
+            }
+            }
+        });
+    
+    </script>
+</body>
+</html>
