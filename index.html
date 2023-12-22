@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FERDS</title>
+    <link rel="icon" type="image/png" href="Imagens/ferds.png">
+    <style>
+
+        @font-face {
+            font-family: 'stretchcima';
+            src: url('fontes/DugasPro-RegularNormal.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: 'stretchlado';
+            src: url('fontes/StretchPro.otf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'fonteescrita';
+            src: url('fontes/WireTypeMonoSC-Bold.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            background-color: #f9f5ec;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            justify-content: center; /* Centraliza horizontalmente na página */
+            align-items: center; /* Centraliza verticalmente na página */
+            }
+
+        .conjunto {
+            position: fixed;
+            overflow: hidden; /* Limpa o float dos quadrados */
+            width: 300px; /* Largura total dos quadrados (100px x 3 quadrados) */
+            top: 90vh;
+            left: 5vh;
+            }
+
+        .quadrado1 {
+            width: 2.5vw; /* Largura do quadrado */
+            height: 2.5vw; /* Altura do quadrado */
+            background-color: #191919; /* Cor de fundo */
+            float: left; /* Alinha os quadrados horizontalmente */
+            margin: 0; /* Remove as margens */
+            box-sizing: border-box; /* Considera padding e borda dentro da largura */
+            }
+
+        .quadrado2 {
+            width: 2.5vw; /* Largura do quadrado */
+            height: 2.5vw; /* Altura do quadrado */
+            background-color: #b8a2cf; /* Cor de fundo */
+            float: left; /* Alinha os quadrados horizontalmente */
+            margin: 0; /* Remove as margens */
+            box-sizing: border-box; /* Considera padding e borda dentro da largura */
+            }
+
+        .quadrado3 {
+            width: 2.5vw; /* Largura do quadrado */
+            height: 2.5vw; /* Altura do quadrado */
+            background-color: #98b48e; /* Cor de fundo */
+            float: left; /* Alinha os quadrados horizontalmente */
+            margin: 0; /* Remove as margens */
+            box-sizing: border-box; /* Considera padding e borda dentro da largura */
+            }
+
+        .FERDS {
+            position: absolute; /* Define o posicionamento absoluto */
+            top: 0; /* Posiciona a partir do topo */
+            left: 0; /* Posiciona a partir da esquerda */
+            margin: 0; /* Remove margens */
+            width: 50vh;
+            height: auto;
+            opacity: 1;
+            cursor: pointer; 
+            transition: 1s;
+            }
+
+        .FERDS:hover {
+            opacity: 0.9;
+        }            
+
+        .rodape {
+            position: absolute;
+            font-family: 'fonteescrita';
+            font-size: 1.5vw;
+            top: 53%; /* Posiciona a partir do topo */
+            right: 0; /* Posiciona a partir da direita */
+        }
+
+        .breve {
+            font-family: 'stretchlado';
+            position: absolute; /* Define o posicionamento absoluto */
+            top: 50%; /* Posiciona a partir do topo */
+            left: 40%; /* Posiciona a partir da esquerda */
+            transform: translate(-50%, -50%); /* Move o texto para o centro */
+            font-size: 40px; /* Tamanho do texto */
+            /* Outros estilos desejados */
+            }
+
+        .inputcomandos {
+            position: absolute;
+            font-family: 'stretchlado';
+            font-size: 0.7vw;
+            top: 53%; /* Posiciona a partir do topo */
+            right: 15vw; /* Posiciona a partir da direita */
+
+            border: none;
+            width: 50vw; /* Aumenta a largura do input */
+            outline: none; /* Remove a borda ao focar */
+            background-color: transparent;
+            color: #191919;
+            opacity: 0.5;
+            border-radius: 5px;
+            cursor: text;
+        }
+
+        #comando {
+            opacity: 0; /* Configura a opacidade inicial para zero (invisível) */
+      transition: opacity 1s ease; /* Adiciona uma transição de 1 segundo */
+    }
+</style>
+</head>
+<body>
+    <div class="conjunto">
+        <div class="quadrado1"></div>
+        <div class="quadrado2"></div>
+        <div class="quadrado3"></div>
+      </div>
+
+      <img class="FERDS" src="Imagens/FERDSESCRITO.png" alt="Ferds escrito" id="logo">
+
+      <!-- <p class="breve">MAIS EM BREVE</p> -->
+
+      <input type="text" id="comando" class="inputcomandos" placeholder="DEIXE O SEU EMAIL AQUI OU DIGITE ALGUM COMANDO">
+
+      <p class="rodape">ALL RIGHTS RESERVED &copy; <b>2023 FERDS</b></p>
+
+<!-- ESPAÇO ANTES DOS SCRIPTS -->
+
+      <script src= "https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+      <script>  
+
+const logo = document.getElementById('logo');
+const inputComandos = document.getElementById('comando');
+
+let isInputVisible = false; // Variável para controlar a visibilidade do input
+
+// Adiciona um evento de clique na imagem
+logo.addEventListener('click', function() {
+  if (isInputVisible) {
+    inputComandos.style.opacity = '0'; // Define a opacidade para 0 se já estiver visível
+  } else {
+    inputComandos.style.opacity = '0.5'; // Define a opacidade para 1 se não estiver visível
+  }
+  
+  isInputVisible = !isInputVisible; // Alterna o estado de visibilidade do input
+});
+
+// Evento para detectar o comando "@help" ao pressionar Enter
+inputComandos.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const comando = inputComandos.value.toLowerCase().trim(); // Obtém o valor do input em letras minúsculas e sem espaços extras
+
+                if (comando === '@inicio') {
+                    window.location.href = 'index.html'; // Redireciona para index.html
+                } else if (comando === '@sphm') {
+                    window.location.href = 'sphm.html'; // Redireciona para sphm.html
+                } else if (comando === '@help') {
+                    // Exibir um alerta com uma lista de comandos
+                    const commandsList = `
+                        <ul style="list-style-type: none; padding-left: 0; font-family: 'fonteescrita';">
+                            <li>@inicio: Voltar para a página inicial.</li>
+                            <li>@sphm: Redirecionar para a página sphm.</li>
+                            <li>@help: Exibir esta lista de comandos.</li>
+                            <br>
+                            <li>O SITE AINDA ESTÁ EM DESENVOLVIMENTO, MAIS COMANDOS EM BREVE.</li>
+                        </ul>
+                    `;
+
+                    Swal.fire({
+                        html: commandsList,
+                        iconColor: 'black', // Altere para a cor desejada
+                        confirmButtonColor: 'black',
+                        allowEnterKey: false // Impede que o Enter feche o alerta
+                    });
+                } else {
+                    // Se nenhum comando correspondente for encontrado, exibe um alerta
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Comando inválido',
+                        text: 'Digite um comando válido.',
+                        confirmButtonColor: 'black'
+                    });
+                }
+
+                inputComandos.value = ''; // Limpa o campo de input após o processamento do comando
+            }
+        });
+    </script>
+</body>
+</html>
